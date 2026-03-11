@@ -1,0 +1,331 @@
+/* ==================================================
+   GLOBAL RESET
+==================================================*/
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI", Arial, sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#020617,#0f172a);
+color:#e5e7eb;
+text-align:center;
+line-height:1.6;
+}
+
+/* ==================================================
+   HEADINGS
+==================================================*/
+h1{
+font-size:32px;
+}
+
+h2{
+font-size:26px;
+}
+
+h3{
+font-size:20px;
+}
+
+h1,h2,h3{
+color:#38bdf8;
+margin-bottom:15px;
+}
+
+/* ==================================================
+   FORMS (GENERAL)
+==================================================*/
+form{
+background:#020617;
+width:360px;
+margin:30px auto;
+padding:30px;
+border-radius:14px;
+box-shadow:0 0 25px rgba(56,189,248,0.30);
+}
+
+/* ==================================================
+   INPUTS
+==================================================*/
+input{
+width:100%;
+padding:14px;
+margin:12px 0;
+border-radius:10px;
+border:1px solid #1e293b;
+background:#020617;
+color:white;
+font-size:15px;
+outline:none;
+transition:0.3s;
+}
+
+input::placeholder{
+color:#94a3b8;
+}
+
+input:focus{
+border-color:#38bdf8;
+box-shadow:0 0 12px rgba(56,189,248,0.55);
+}
+
+/* ==================================================
+   BUTTONS
+==================================================*/
+button{
+width:100%;
+padding:14px;
+margin-top:18px;
+border-radius:10px;
+background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+color:#020617;
+border:none;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+letter-spacing:1px;
+transition:0.3s;
+}
+
+button:hover{
+background:linear-gradient(135deg,#0ea5e9,#38bdf8);
+transform:translateY(-2px);
+box-shadow:0 10px 25px rgba(56,189,248,0.7);
+}
+
+/* ==================================================
+   RESULT BOX
+==================================================*/
+.result-box{
+margin:25px auto;
+width:380px;
+padding:22px;
+border-radius:14px;
+background:#020617;
+box-shadow:0 0 25px rgba(56,189,248,0.30);
+font-size:16px;
+}
+
+/* Status Colors */
+.low{color:#22c55e;}
+.medium{color:#facc15;}
+.high{color:#ef4444;}
+
+.legit{color:#22c55e;}
+.fraud{color:#ef4444;}
+
+/* ==================================================
+   HEADER BAR
+==================================================*/
+header{
+background:rgba(2,6,23,0.95);
+padding:20px 45px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+backdrop-filter:blur(12px);
+box-shadow:0 5px 30px rgba(0,0,0,0.9);
+}
+
+header h2{
+font-size:28px;
+letter-spacing:0.5px;
+}
+
+header a{
+color:#22c55e;
+text-decoration:none;
+font-weight:bold;
+padding:9px 20px;
+border-radius:10px;
+border:1px solid #22c55e;
+transition:0.3s;
+}
+
+header a:hover{
+background:#22c55e;
+color:black;
+box-shadow:0 0 12px rgba(34,197,94,0.7);
+}
+
+/* ==================================================
+   ADMIN DASHBOARD GRID
+==================================================*/
+.admin-container{
+padding:50px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+/* ==================================================
+   ADMIN GLASS CARDS
+==================================================*/
+.card{
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(16px);
+padding:28px;
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,0.9);
+border:1px solid rgba(255,255,255,0.1);
+transition:0.35s ease;
+position:relative;
+overflow:hidden;
+animation:fadeUp 0.7s ease forwards;
+}
+
+/* Patch Shine */
+.card::before{
+content:"";
+position:absolute;
+top:-50%;
+left:-50%;
+width:200%;
+height:200%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.1),transparent);
+transform:rotate(25deg);
+transition:0.6s;
+}
+
+.card:hover::before{
+top:-20%;
+left:-20%;
+}
+
+.card:hover{
+transform:translateY(-12px) scale(1.03);
+box-shadow:0 25px 65px rgba(0,0,0,1);
+border-color:#38bdf8;
+}
+
+/* Card Text */
+.card h3{
+color:#22c55e;
+margin-bottom:18px;
+}
+
+.card ul{
+list-style:none;
+padding:0;
+}
+
+.card ul li,
+.card p{
+padding:9px 0;
+border-bottom:1px dashed rgba(255,255,255,0.18);
+font-size:16px;
+}
+
+.card ul li:last-child,
+.card p:last-child{
+border-bottom:none;
+}
+
+/* ==================================================
+   CHART
+==================================================*/
+canvas{
+margin-top:25px;
+background:#020617;
+border-radius:14px;
+padding:12px;
+}
+
+/* ==================================================
+   MODERN LOGIN PAGE
+==================================================*/
+.login-body{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#020617,#0f172a);
+}
+
+/* Center */
+.login-wrapper{
+display:flex;
+justify-content:center;
+align-items:center;
+width:100%;
+}
+
+/* Login Card */
+.login-card{
+width:400px;
+padding:55px 45px;
+background:#020617;
+border-radius:22px;
+box-shadow:0 0 45px rgba(56,189,248,0.40);
+text-align:center;
+animation:fadeUp 0.7s ease;
+}
+
+/* Disable patch effect on login */
+.login-card::before,
+.login-card::after{
+display:none !important;
+content:none !important;
+}
+
+/* Login Title */
+.login-card h1{
+font-size:32px;
+color:#38bdf8;
+margin-bottom:6px;
+}
+
+.subtitle{
+color:#94a3b8;
+margin-bottom:35px;
+font-size:14px;
+}
+
+/* ==================================================
+   ANIMATION
+==================================================*/
+@keyframes fadeUp{
+from{opacity:0; transform:translateY(30px);}
+to{opacity:1; transform:translateY(0);}
+}
+/* ---------- RESULT CARD ---------- */
+
+.result-card{
+    background:#0f172a;
+    color:white;
+    padding:20px;
+    margin:20px auto;
+    width:60%;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(0,0,0,0.4);
+}
+
+.result-card h2{
+    color:#38bdf8;
+}
+
+/* ---------- FORM ---------- */
+
+form input{
+    width:280px;
+    padding:10px;
+    margin:6px;
+    border-radius:6px;
+    border:none;
+}
+
+button{
+    padding:10px 25px;
+    background:#22c55e;
+    border:none;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#16a34a;
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>User Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#020617;
+  color:white;
+}
+
+/* HEADER */
+header{
+  background:#020617;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #334155;
+}
+
+header h2{ color:#38bdf8; }
+
+.logout-btn{
+  background:#ef4444;
+  color:white;
+  border:none;
+  padding:10px 20px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* MAIN CARD */
+.container{
+  width:400px;
+  margin:40px auto;
+  background:#1f2933;
+  padding:30px;
+  border-radius:12px;
+}
+
+/* INPUTS */
+label{ font-size:14px; }
+
+input{
+  width:100%;
+  padding:10px;
+  margin:8px 0 15px 0;
+  background:#020617;
+  border:1px solid #334155;
+  color:white;
+  border-radius:6px;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  background:#22c55e;
+  border:none;
+  color:black;
+  font-weight:bold;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* RESULT */
+.result{
+  margin-top:25px;
+  text-align:center;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h2>Transaction Risk Analyzer</h2>
+<a href="/logout"><button class="logout-btn">Logout</button></a>
+</header>
+
+<div class="container">
+
+<h3>Enter Transaction Details</h3>
+
+<form method="POST" action="/dashboard">
+
+<label>Amount</label>
+<input type="number" name="amount" required>
+
+<label>Hour (0-23)</label>
+<input type="number" name="hour" required>
+
+<label>Merchant Risk (0-1)</label>
+<input type="number" step="any" name="merchant" required>
+
+<label>Transactions Today</label>
+<input type="number" name="count" required>
+
+<label>Device Trust (0-1)</label>
+<input type="number" step="any" name="device" required>
+
+<label>Location Change (0/1)</label>
+<input type="number" name="loc" required>
+
+<label>International (0/1)</label>
+<input type="number" name="intl" required>
+
+<button type="submit">Analyze Transaction</button>
+
+</form>
+
+{% if result %}
+<div class="result">
+
+<h2>{{ result }}</h2>
+<h3>Risk Level: {{ risk }}</h3>
+<h3>Probability: {{ prob }}%</h3>
+
+<canvas id="chart" width="300" height="200"></canvas>
+
+<script>
+new Chart(document.getElementById("chart"),{
+  type:"bar",
+  data:{
+    labels:["Legit","Fraud"],
+    datasets:[{
+      data:[100-{{prob}},{{prob}}],
+      backgroundColor:["#22c55e","#ef4444"]
+    }]
+  },
+  options:{scales:{y:{beginAtZero:true,max:100}}}
+});
+</script>
+
+</div>
+{% endif %}
+
+</div>
+
+</body>
+</html>

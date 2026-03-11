@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fraud Detection System | Login</title>
+
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ================= BACKGROUND ================= */
+body{
+    margin:0;
+    height:100vh;
+    background:radial-gradient(circle at top,#0f172a,#020617);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:Segoe UI, Arial, sans-serif;
+}
+
+/* ================= OUTER CARD ================= */
+.login-card{
+    width:400px;
+    padding:40px 35px;
+    background:rgba(15,23,42,0.90);
+    border-radius:22px;
+    box-shadow:0 0 40px rgba(56,189,248,0.4);
+    text-align:center;
+    box-sizing:border-box;
+}
+
+/* ================= HEADER ================= */
+.login-card h1{
+    color:#38bdf8;
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+.login-card p{
+    color:#cbd5f5;
+    margin-bottom:35px;
+}
+
+/* ================= FORM ================= */
+.login-card form{
+    width:100%;
+}
+
+/* ================= INPUT GROUP ================= */
+.input-group{
+    position:relative;
+    margin-bottom:22px;
+}
+
+.input-group i{
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#38bdf8;
+    font-size:16px;
+}
+
+.input-group input{
+    width:100%;
+    padding:12px 12px 12px 40px;
+    border-radius:8px;
+    border:none;
+    background:#020617;
+    color:white;
+    font-size:15px;
+    box-sizing:border-box;
+}
+
+.input-group input:focus{
+    outline:none;
+    box-shadow:0 0 6px #38bdf8;
+}
+
+/* ================= BUTTON ================= */
+button{
+    width:100%;
+    padding:12px;
+    background:#22c55e;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:bold;
+    color:black;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#16a34a;
+}
+
+/* ================= FOOTER ================= */
+.footer-text{
+    margin-top:25px;
+    color:#94a3b8;
+    font-size:13px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="login-card">
+
+<h1>Fraud Detection System</h1>
+<p>Secure Login Portal</p>
+
+<form method="POST">
+
+<div class="input-group">
+<i class="fa fa-user"></i>
+<input type="text" name="username" placeholder="Username" required>
+</div>
+
+<div class="input-group">
+<i class="fa fa-lock"></i>
+<input type="password" name="password" placeholder="Password" required>
+</div>
+
+<button type="submit">LOGIN</button>
+
+</form>
+
+<div class="footer-text">
+© 2026 Fraud Detection Platform
+</div>
+
+</div>
+
+</body>
+</html>

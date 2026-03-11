@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="/static/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+.admin-container{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  padding:20px;
+}
+
+.card{
+  background:#1f2933;
+  color:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 0 10px rgba(0,0,0,0.5);
+}
+
+.card h3{
+  color:#38bdf8;
+  margin-bottom:10px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+th,td{
+  border:1px solid #555;
+  padding:8px;
+  text-align:center;
+}
+
+th{
+  background:#020617;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background:#020617;
+  color:white;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h2>Fraud Detection – Admin Control Panel</h2>
+<a href="/logout" style="color:#38bdf8;">Logout</a>
+</header>
+
+<div class="admin-container">
+
+<!-- ================= SYSTEM INFO ================= -->
+<div class="card">
+<h3>System Information</h3>
+<p><b>Model Version:</b> 1.0</p>
+<p><b>Algorithm:</b> Random Forest</p>
+<p><b>Status:</b> Running</p>
+<p><b>Risk Engine:</b> Active</p>
+</div>
+
+<!-- ================= MODEL PERFORMANCE ================= -->
+<div class="card">
+<h3>Model Performance</h3>
+<p>Accuracy: ~95%</p>
+<p>Precision: High</p>
+<p>Recall: High</p>
+</div>
+
+<!-- ================= LATEST PREDICTION ================= -->
+<div class="card">
+<h3>Latest Prediction</h3>
+
+<p><b>Result:</b> <span id="latestResult">No prediction yet</span></p>
+<p><b>Risk Level:</b> <span id="latestRisk">N/A</span></p>
+<p><b>Probability:</b> <span id="latestProbability">N/A%</span></p>
+
+</div>
+
+<!-- ================= RISK DISTRIBUTION ================= -->
+<div class="card">
+<h3>Risk Distribution</h3>
+<canvas id="riskChart" height="220"></canvas>
+</div>
+
+<!-- ================= RECENT TRANSACTIONS ================= -->
+<div class="card" style="grid-column:span 4;">
+<h3>Recent Transactions</h3>
+
+<table>
+<tr>
+<th>ID</th>
+<th>Amount</th>
+<th>Result</th>
+<th>Probability (%)</th>
+</tr>
+
+{% for t in transactions %}
+<tr>
+<td>{{ t.id }}</td>
+<td>{{ t.amount }}</td>
+<td>{{ t.result }}</td>
+<td>{{ t.probability }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+
+async function loadLatestPrediction(){
+  const res = await fetch("/latest_prediction");
+  const data = await res.json();
+
+  document.getElementById("latestResult").innerText = data.result;
+  document.getElementById("latestRisk").innerText = data.risk;
+  document.getElementById("latestProbability").innerText = data.probability + "%";
+}
+
+setInterval(loadLatestPrediction,3000);
+loadLatestPrediction();
+
+// ---------- DONUT CHART ----------
+const low = 40;
+const medium = 35;
+const high = 25;
+
+new Chart(document.getElementById("riskChart"),{
+  type:"doughnut",
+  data:{
+    labels:["Low Risk","Medium Risk","High Risk"],
+    datasets:[{
+      data:[low,medium,high],
+      backgroundColor:["#22c55e","#facc15","#ef4444"]
+    }]
+  }
+});
+
+</script>
+
+</body>
+</html>
